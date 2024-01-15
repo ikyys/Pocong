@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="SHORTCUT ICON" href="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-ash3/1376593_165431530330025_52885209_n.jpg">
+<title>/Team Pocong</title>
+<meta http-equiv="refresh" content="265">
+<iframe width="1" height="1" src="http://www.youtube.com/embed/f4J7-WR1QOY?feature=player_detailpage&autoplay=1" frameborder="0" allowfullscreen></iframe>
+<style type="text/css" media="screen">
+    body{
+        font-family: Arial, "MS Trebuchet", sans-serif;
+        background-color: #000000;
+    }
+    #list{
+        height:600px;
+        width:600px;
+        overflow:hidden;
+        position:relative;
+        background-color: none;
+    }
+    #list ul,
+    #list li{
+        list-style:none;
+        margin:0;
+        padding:0;
+    }
+    #list a{
+        position:absolute;
+        text-decoration: none;
+        color:#008000;
+    }
+    #list a:hover{
+        color:#ccc;
+    }
+</style>
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body>
+<center>    
+<div id="list">
+    <ul>
+        <li><a href="#">This</a></li>
+        <li><a href="#">Site</a></li>
+        <li><a href="#">has</a></li>
+        <li><a href="#">Been</a></li>
+		<li><a href="#">Hacked</a></li>
+		<li><a href="#">By</a></li>
+        <li><a href="#">Team</a></li>
+        <li><a href="#">Pocong</a></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    
+	var element = $('#list a');
+	var offset = 0; 
+	var stepping = 0.03;
+	var list = $('#list');
+	var $list = $(list)
+
+$list.mousemove(function(e){
+    var topOfList = $list.eq(0).offset().top
+    var listHeight = $list.height()
+    stepping = (e.clientY - topOfList) /  listHeight * 0.2 - 0.1;
+    
+});
+
+
+for (var i = element.length - 1; i >= 0; i--)
+{
+    element[i].elemAngle = i * Math.PI * 2 / element.length;
+}
+
+
+setInterval(render, 20);
+
+
+function render(){
+    for (var i = element.length - 1; i >= 0; i--){
+        
+        var angle = element[i].elemAngle + offset;
+        
+        x = 120 + Math.sin(angle) * 20;
+        y = 45 + Math.cos(angle) * 20;
+        size = Math.round(40 - Math.sin(angle) * 40);
+        
+        var elementCenter = $(element[i]).width() / 2;
+
+        var leftValue = (($list.width()/2) * x / 100 - elementCenter) + "px"
+
+        $(element[i]).css("fontSize", size + "pt");
+        $(element[i]).css("opacity",size/100);
+        $(element[i]).css("zIndex" ,size);
+        $(element[i]).css("left" ,leftValue);
+        $(element[i]).css("top", y + "%");
+    }
+    
+    offset += stepping;
+}
+
+    
+});
+
+</script>
+</center>
+</body>
+</html>
